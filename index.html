@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GIVSTORE — iPhone Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#" class="navbar__logo" onclick="showPage('home')">GIVSTORE</a>
+
+      <nav class="navbar__links" id="navLinks">
+        <a href="#" onclick="showPage('home')"       data-page="home">Beranda</a>
+        <a href="#" onclick="showPage('catalog')"    data-page="catalog">Katalog</a>
+        <a href="#" onclick="showPage('about')"      data-page="about">Tentang</a>
+        <a href="#" onclick="showPage('contact')"    data-page="contact">Kontak</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <button class="btn-icon" id="searchToggleBtn" aria-label="Cari produk" onclick="toggleSearchBar()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="btn-icon cart-btn" aria-label="Keranjang" onclick="showPage('cart')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <button class="btn-icon hamburger" aria-label="Menu" id="hamburger" onclick="toggleMobileMenu()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar">
+      <div class="container">
+        <input type="text" id="searchInput" placeholder="Cari produk iPhone…" oninput="handleSearch(this.value)" />
+        <button onclick="toggleSearchBar()">✕</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN BERANDA
+  ═══════════════════════════════════════════ -->
+  <main id="page-home" class="page active">
+
+    <!-- ── Hero ──────────────────────────────── -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <span class="hero__eyebrow">Koleksi 2025</span>
+          <h1 class="hero__title">iPhone Terbaru<br>Harga Terbaik</h1>
+          <p class="hero__sub">Produk resmi bergaransi Apple Indonesia.<br>Pengiriman ke seluruh wilayah.</p>
+          <div class="hero__cta-group">
+            <button class="btn btn--primary" onclick="showPage('catalog')">Lihat Katalog</button>
+            <button class="btn btn--outline-light" onclick="showPage('about')">Tentang Kami</button>
+          </div>
+          <div class="hero__trust">
+            <span><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 3.9L14 5.8l-3 2.9.7 4.1L8 10.8l-3.7 1.9.7-4.1-3-2.9 4.1-.9z"/></svg> 4.9/5 · 5.000+ pembeli</span>
+            <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 14s6-3 6-7.5V3L8 1 2 3v3.5C2 11 8 14 8 14z"/></svg> Garansi resmi Apple</span>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <!-- Dekoratif -->
+          <div class="hero__deco hero__deco--ring"></div>
+          <div class="hero__deco hero__deco--dot hero__deco--dot1"></div>
+          <div class="hero__deco hero__deco--dot hero__deco--dot2"></div>
+          <!-- 3 iPhone -->
+          <div class="hero__phones">
+            <div class="hero__phone hero__phone--left" onclick="openDetail('ip17promax-256')">
+              <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro-max.jpg"
+                   alt="iPhone 17 Pro Max"
+                   onerror="this.parentElement.classList.add('img-error')">
+              <span class="hero__phone-label">17 Pro Max</span>
+            </div>
+            <div class="hero__phone hero__phone--center" onclick="openDetail('ip17pro-256')">
+              <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro.jpg"
+                   alt="iPhone 17 Pro"
+                   onerror="this.parentElement.classList.add('img-error')">
+              <span class="hero__phone-label hero__phone-label--main">17 Pro</span>
+            </div>
+            <div class="hero__phone hero__phone--right" onclick="openDetail('ip17-128')">
+              <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17.jpg"
+                   alt="iPhone 17"
+                   onerror="this.parentElement.classList.add('img-error')">
+              <span class="hero__phone-label">iPhone 17</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Scroll hint -->
+      <div class="hero__scroll-hint">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ── Ticker / Stats strip ───────────────── -->
+    <div class="stats-strip">
+      <div class="container stats-strip__inner">
+        <div class="stats-strip__item">
+          <strong>46+</strong><span>Varian Produk</span>
+        </div>
+        <div class="stats-strip__divider"></div>
+        <div class="stats-strip__item">
+          <strong>5.000+</strong><span>Pembeli Puas</span>
+        </div>
+        <div class="stats-strip__divider"></div>
+        <div class="stats-strip__item">
+          <strong>iPhone 11–17</strong><span>Semua Seri Tersedia</span>
+        </div>
+        <div class="stats-strip__divider"></div>
+        <div class="stats-strip__item">
+          <strong>Garansi Resmi</strong><span>Apple Indonesia</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Keunggulan ─────────────────────────── -->
+    <section class="features section">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <span class="section__eyebrow">Kenapa GIVSTORE</span>
+            <h2 class="section__title">Belanja Lebih Mudah &amp; Aman</h2>
+          </div>
+        </div>
+        <div class="features__grid">
+          <div class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>100% Original</h3>
+            <p>Semua produk bergaransi resmi Apple Indonesia, bukan refurbished.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </div>
+            <h3>Pengiriman Cepat</h3>
+            <p>Dikirim 1–3 hari kerja ke seluruh Indonesia, dikemas aman.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3>Layanan Pelanggan</h3>
+            <p>Tim kami siap membantu lewat WhatsApp Senin–Sabtu, 09–18 WIB.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+            </div>
+            <h3>Garansi Retur</h3>
+            <p>Produk cacat dapat diretur dalam 7 hari setelah pembelian.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Produk Unggulan ────────────────────── -->
+    <section class="featured-products section section--alt">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <span class="section__eyebrow">Pilihan Editor</span>
+            <h2 class="section__title">Produk Unggulan</h2>
+          </div>
+          <button class="btn btn--ghost" onclick="showPage('catalog')">Lihat Semua →</button>
+        </div>
+        <div class="product-grid" id="featuredGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── Produk Terbaru ─────────────────────── -->
+    <section class="new-products section">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <span class="section__eyebrow">Baru Masuk</span>
+            <h2 class="section__title">Produk Terbaru</h2>
+          </div>
+          <button class="btn btn--ghost" onclick="filterByBadge('new')">Lihat Semua →</button>
+        </div>
+        <div class="product-grid" id="newProductsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── Produk Terlaris ────────────────────── -->
+    <section class="hot-products section section--alt">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <span class="section__eyebrow">Paling Diminati</span>
+            <h2 class="section__title">Produk Terlaris</h2>
+          </div>
+          <button class="btn btn--ghost" onclick="filterByBadge('hot')">Lihat Semua →</button>
+        </div>
+        <div class="product-grid" id="hotProductsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── Seri iPhone ────────────────────────── -->
+    <section class="series-nav section">
+      <div class="container">
+        <div class="section__header">
+          <div>
+            <span class="section__eyebrow">Jelajahi</span>
+            <h2 class="section__title">Semua Seri iPhone</h2>
+          </div>
+        </div>
+        <div class="series-grid" id="seriesGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── Banner CTA ─────────────────────────── -->
+    <section class="cta-banner section">
+      <div class="container cta-banner__inner">
+        <div class="cta-banner__text">
+          <span class="cta-banner__eyebrow">Konsultasi Gratis</span>
+          <h2>Bingung pilih iPhone yang tepat?</h2>
+          <p>Tim kami siap memberikan rekomendasi terbaik sesuai kebutuhan dan budgetmu — gratis, tanpa biaya.</p>
+        </div>
+        <div class="cta-banner__actions">
+          <button class="btn btn--light" onclick="showPage('contact')">Hubungi Kami</button>
+          <button class="btn btn--outline-light" onclick="showPage('catalog')">Lihat Katalog</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN KATALOG
+  ═══════════════════════════════════════════ -->
+  <main id="page-catalog" class="page">
+    <div class="page-hero page-hero--sm">
+      <div class="container">
+        <h1>Katalog iPhone</h1>
+        <p>Semua seri tersedia — pilih yang paling cocok untukmu.</p>
+      </div>
+    </div>
+
+    <div class="container catalog-layout section">
+      <!-- Sidebar Filter -->
+      <aside class="filter-panel" id="filterPanel">
+        <div class="filter-panel__header">
+          <h3>Filter</h3>
+          <button class="filter-reset" onclick="resetFilters()">Reset</button>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-group__label">Seri</label>
+          <div class="filter-group__options" id="seriesFilter"></div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-group__label">Penyimpanan</label>
+          <div class="filter-group__options" id="storageFilter"></div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-group__label">Rentang Harga</label>
+          <div class="price-range">
+            <input type="range" id="priceRange" min="0" max="35000000" step="500000" value="35000000" oninput="handlePriceFilter(this.value)" />
+            <span id="priceRangeLabel">≤ Rp 35.000.000</span>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-group__label">Urutan</label>
+          <select id="sortSelect" onchange="applyFilters()">
+            <option value="default">Default</option>
+            <option value="price-asc">Harga: Terendah</option>
+            <option value="price-desc">Harga: Tertinggi</option>
+            <option value="name-asc">Nama: A–Z</option>
+          </select>
+        </div>
+      </aside>
+
+      <!-- Product Grid -->
+      <div class="catalog-main">
+        <div class="catalog-toolbar">
+          <span id="catalogCount">0 produk</span>
+          <button class="btn-icon filter-mobile-toggle" onclick="toggleFilterPanel()" aria-label="Filter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filter
+          </button>
+        </div>
+        <div class="price-disclaimer">
+          ⚠️ Semua harga adalah <strong>harga simulasi</strong> untuk keperluan demonstrasi. Hubungi kami untuk harga resmi terkini.
+        </div>
+        <div class="product-grid" id="catalogGrid"></div>
+        <p class="empty-state" id="catalogEmpty" style="display:none">Tidak ada produk yang sesuai filter.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN DETAIL PRODUK
+  ═══════════════════════════════════════════ -->
+  <main id="page-detail" class="page">
+    <div class="container section" id="detailContent"></div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN KERANJANG
+  ═══════════════════════════════════════════ -->
+  <main id="page-cart" class="page">
+    <div class="page-hero page-hero--sm">
+      <div class="container">
+        <h1>Keranjang Belanja</h1>
+      </div>
+    </div>
+    <div class="container section cart-layout">
+      <div class="cart-items" id="cartItems"></div>
+      <aside class="cart-summary" id="cartSummary"></aside>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN CHECKOUT
+  ═══════════════════════════════════════════ -->
+  <main id="page-checkout" class="page">
+    <div class="page-hero page-hero--sm">
+      <div class="container"><h1>Checkout</h1></div>
+    </div>
+    <div class="container section checkout-layout">
+      <form class="checkout-form" id="checkoutForm" onsubmit="submitOrder(event)">
+        <h2>Data Pembeli</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="buyerName">Nama Lengkap *</label>
+            <input type="text" id="buyerName" required placeholder="John Doe" />
+          </div>
+          <div class="form-group">
+            <label for="buyerPhone">Nomor WhatsApp *</label>
+            <input type="tel" id="buyerPhone" required placeholder="08xxxxxxxxxx" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="buyerEmail">Email *</label>
+          <input type="email" id="buyerEmail" required placeholder="email@contoh.com" />
+        </div>
+        <div class="form-group">
+          <label for="buyerAddress">Alamat Lengkap *</label>
+          <textarea id="buyerAddress" rows="3" required placeholder="Jl. Contoh No. 1, Kota, Provinsi, Kode Pos"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="buyerCity">Kota *</label>
+            <input type="text" id="buyerCity" required placeholder="Jakarta" />
+          </div>
+          <div class="form-group">
+            <label for="buyerProvince">Provinsi *</label>
+            <input type="text" id="buyerProvince" required placeholder="DKI Jakarta" />
+          </div>
+        </div>
+
+        <h2 style="margin-top:2rem">Metode Pengiriman</h2>
+        <div class="shipping-options">
+          <label class="shipping-option">
+            <input type="radio" name="shipping" value="reguler" checked onchange="updateOrderSummary()" />
+            <span class="shipping-option__info">
+              <strong>Reguler</strong><span>3–5 hari kerja</span>
+            </span>
+            <span class="shipping-option__price">Rp 15.000</span>
+          </label>
+          <label class="shipping-option">
+            <input type="radio" name="shipping" value="express" onchange="updateOrderSummary()" />
+            <span class="shipping-option__info">
+              <strong>Express</strong><span>1–2 hari kerja</span>
+            </span>
+            <span class="shipping-option__price">Rp 35.000</span>
+          </label>
+          <label class="shipping-option">
+            <input type="radio" name="shipping" value="sameday" onchange="updateOrderSummary()" />
+            <span class="shipping-option__info">
+              <strong>Same Day</strong><span>Hari ini (Jabodetabek)</span>
+            </span>
+            <span class="shipping-option__price">Rp 65.000</span>
+          </label>
+        </div>
+
+        <h2 style="margin-top:2rem">Metode Pembayaran</h2>
+        <div class="payment-options">
+          <label class="payment-option"><input type="radio" name="payment" value="transfer" checked /> Transfer Bank (BCA/Mandiri/BNI)</label>
+          <label class="payment-option"><input type="radio" name="payment" value="ewallet" /> E-Wallet (GoPay / OVO / Dana)</label>
+          <label class="payment-option"><input type="radio" name="payment" value="cod" /> Bayar di Tempat (COD)</label>
+        </div>
+
+        <h2 style="margin-top:2rem">Catatan</h2>
+        <div class="form-group">
+          <textarea id="buyerNote" rows="2" placeholder="Catatan tambahan untuk penjual (opsional)"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full" style="margin-top:1.5rem">Buat Pesanan</button>
+      </form>
+
+      <aside class="checkout-summary" id="checkoutSummary"></aside>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN ORDER SUCCESS
+  ═══════════════════════════════════════════ -->
+  <main id="page-success" class="page">
+    <div class="container section success-page">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h1>Pesanan Berhasil!</h1>
+      <p id="successMessage"></p>
+      <div class="success-actions">
+        <button class="btn btn--primary" onclick="showPage('home')">Kembali ke Beranda</button>
+        <button class="btn btn--ghost" onclick="showPage('catalog')">Lanjut Belanja</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN TENTANG
+  ═══════════════════════════════════════════ -->
+  <main id="page-about" class="page">
+    <div class="page-hero">
+      <div class="container">
+        <h1>Tentang GIVSTORE</h1>
+        <p>Toko iPhone terpercaya dengan pengalaman lebih dari 5 tahun.</p>
+      </div>
+    </div>
+    <div class="container section about-content">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Siapa Kami?</h2>
+          <p>GIVSTORE adalah toko online yang didirikan pada 2019, berfokus pada penjualan produk iPhone original bergaransi resmi Apple Indonesia. Kami hadir untuk memberikan pengalaman belanja yang mudah, aman, dan menyenangkan.</p>
+          <p>Dengan lebih dari 5.000 pelanggan puas dan ribuan produk terjual, kami terus berkomitmen untuk menyediakan produk terbaik dengan harga yang kompetitif.</p>
+          <h2 style="margin-top:2rem">Visi & Misi</h2>
+          <ul class="about-list">
+            <li>Menjadi toko iPhone terpercaya nomor satu di Indonesia.</li>
+            <li>Memberikan produk 100% original dengan harga terjangkau.</li>
+            <li>Memberikan pelayanan pelanggan yang responsif dan ramah.</li>
+            <li>Memastikan setiap transaksi berjalan aman dan transparan.</li>
+          </ul>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card"><span class="stat-card__number">5.000+</span><span>Pelanggan Puas</span></div>
+          <div class="stat-card"><span class="stat-card__number">10.000+</span><span>Produk Terjual</span></div>
+          <div class="stat-card"><span class="stat-card__number">5+</span><span>Tahun Pengalaman</span></div>
+          <div class="stat-card"><span class="stat-card__number">4.9★</span><span>Rating Rata-rata</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN KONTAK
+  ═══════════════════════════════════════════ -->
+  <main id="page-contact" class="page">
+    <div class="page-hero">
+      <div class="container">
+        <h1>Hubungi Kami</h1>
+        <p>Ada pertanyaan? Kami siap membantu.</p>
+      </div>
+    </div>
+    <div class="container section contact-layout">
+      <div class="contact-info">
+        <h2>Informasi Kontak</h2>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .9h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <div><strong>WhatsApp</strong><span>+62 812-3456-7890</span></div>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div><strong>Email</strong><span>hello@givstore.id</span></div>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><strong>Alamat</strong><span>Jl. Contoh No. 1, Jakarta Selatan, 12345</span></div>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div><strong>Jam Operasional</strong><span>Senin–Sabtu, 09.00–18.00 WIB</span></div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <h2>Kirim Pesan</h2>
+        <div class="form-group">
+          <label for="contactName">Nama</label>
+          <input type="text" id="contactName" required placeholder="Nama kamu" />
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email</label>
+          <input type="email" id="contactEmail" required placeholder="email@contoh.com" />
+        </div>
+        <div class="form-group">
+          <label for="contactSubject">Subjek</label>
+          <input type="text" id="contactSubject" required placeholder="Pertanyaan tentang produk" />
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Pesan</label>
+          <textarea id="contactMessage" rows="5" required placeholder="Tulis pesanmu di sini…"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Kirim Pesan</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       HALAMAN HASIL PENCARIAN
+  ═══════════════════════════════════════════ -->
+  <main id="page-search" class="page">
+    <div class="page-hero page-hero--sm">
+      <div class="container">
+        <h1>Hasil Pencarian</h1>
+        <p id="searchResultMeta"></p>
+      </div>
+    </div>
+    <div class="container section">
+      <div class="product-grid" id="searchGrid"></div>
+      <p class="empty-state" id="searchEmpty" style="display:none">Tidak ada produk yang cocok dengan pencarianmu.</p>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       TOAST NOTIFICATION
+  ═══════════════════════════════════════════ -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo">GIVSTORE</span>
+        <p>Toko iPhone terpercaya dengan produk 100% original bergaransi resmi.</p>
+      </div>
+      <div class="footer__links">
+        <h4>Navigasi</h4>
+        <a href="#" onclick="showPage('home')">Beranda</a>
+        <a href="#" onclick="showPage('catalog')">Katalog</a>
+        <a href="#" onclick="showPage('about')">Tentang</a>
+        <a href="#" onclick="showPage('contact')">Kontak</a>
+      </div>
+      <div class="footer__links">
+        <h4>Layanan</h4>
+        <a href="#">Cara Pemesanan</a>
+        <a href="#">Kebijakan Retur</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="footer__contact">
+        <h4>Kontak Cepat</h4>
+        <p>WhatsApp: +62 812-3456-7890</p>
+        <p>Email: hello@givstore.id</p>
+        <p>Senin–Sabtu, 09.00–18.00 WIB</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2024 GIVSTORE. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
